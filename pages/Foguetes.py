@@ -18,7 +18,8 @@ rockets = space.loc[space["Company"] == 'SpaceX', "Rocket"].unique()
 ship = st.sidebar.selectbox("Foguetes", rockets)
 
 
-# Status da nave
+# status da nave
+
 shipStatus = space.loc[space["Rocket"] == ship, "RocketStatus"].unique()
 status_map = {"Active": "Ativo", "Retired": "Inativo"}
 shipStatus = [status_map.get(status, status) for status in shipStatus]  # Substitui apenas se houver correspondência
@@ -26,7 +27,13 @@ shipStatus = [status_map.get(status, status) for status in shipStatus]  # Substi
 shipPrice = space.loc[space["Rocket"] == ship, "Price"].unique()
 
 st.title(ship)
-st.subheader(f"Situação: {', '.join(shipStatus)}")
+#st.subheader(f"Situação: {', '.join(shipStatus)}")
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Situação: ", f'{shipStatus}')
+col2.metric("Total de missões: ",)
+col3.metric("Número de missões: ",)
+
 
 
 st.divider()
